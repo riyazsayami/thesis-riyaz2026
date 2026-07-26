@@ -1,0 +1,190 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+html{scroll-behavior:smooth}
+body{background:#f4f8fb;color:#333;padding-top:80px}
+
+/* Navbar */
+.navbar{
+background:#0d6efd;
+padding:15px 0;
+transition:.3s;
+box-shadow:0 2px 10px rgba(0,0,0,.15)
+}
+.navbar-brand{
+font-size:1.7rem;
+font-weight:bold
+}
+.nav-link{
+color:#fff!important;
+margin-left:15px;
+transition:.3s
+}
+.nav-link:hover{
+color:#ffd54f!important
+}
+.btn-light{
+font-weight:bold;
+border-radius:30px
+}
+
+/* Hero */
+.hero{
+background:linear-gradient(rgba(13,110,253,.85),rgba(13,110,253,.85));
+color:#fff;
+padding:120px 0;
+text-align:center
+}
+.hero h1{
+font-size:3rem;
+font-weight:700
+}
+.hero p{
+font-size:1.2rem;
+margin:20px auto;
+max-width:700px
+}
+.hero .btn{
+margin:10px;
+padding:12px 30px;
+border-radius:30px
+}
+
+/* Section */
+section{
+padding:80px 0
+}
+.section-title{
+text-align:center;
+margin-bottom:50px
+}
+.section-title h2{
+font-weight:700;
+color:#0d6efd
+}
+.section-title p{
+color:#777
+}
+
+/* Cards */
+.card{
+border:none;
+border-radius:15px;
+transition:.3s;
+box-shadow:0 5px 15px rgba(0,0,0,.08)
+}
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,.15)
+}
+.card-body{
+padding:30px
+}
+.card h4{
+color:#0d6efd;
+margin-bottom:15px
+}
+
+/* Statistics */
+.stats{
+background:#0d6efd;
+color:#fff
+}
+.stats h2{
+font-size:2.5rem;
+font-weight:bold
+}
+.stats p{
+font-size:1.1rem
+}
+
+/* Buttons */
+.btn-primary{
+background:#0d6efd;
+border:none;
+padding:12px 28px;
+border-radius:30px
+}
+.btn-primary:hover{
+background:#0b5ed7
+}
+.btn-outline-primary{
+border-radius:30px
+}
+
+/* Forms */
+.form-control{
+border-radius:10px;
+padding:12px
+}
+.form-control:focus{
+box-shadow:none;
+border-color:#0d6efd
+}
+
+/* Footer */
+footer{
+background:#0d1b2a;
+color:#fff;
+padding:60px 0 20px
+}
+footer h4,
+footer h5{
+margin-bottom:20px
+}
+footer a{
+color:#fff;
+text-decoration:none
+}
+footer a:hover{
+color:#4da3ff
+}
+footer hr{
+background:#fff;
+margin:30px 0
+}
+
+/* Animation */
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:1s
+}
+.fade-up.show{
+opacity:1;
+transform:translateY(0)
+}
+
+/* Responsive */
+@media(max-width:992px){
+.hero h1{
+font-size:2.4rem
+}
+.hero p{
+font-size:1rem
+}
+}
+
+@media(max-width:768px){
+.navbar-brand{
+font-size:1.4rem
+}
+.hero{
+padding:90px 20px
+}
+.hero h1{
+font-size:2rem
+}
+section{
+padding:60px 0
+}
+}
+
+@media(max-width:576px){
+.hero h1{
+font-size:1.7rem
+}
+.hero .btn{
+display:block;
+width:100%;
+margin:10px 0
+}
+}

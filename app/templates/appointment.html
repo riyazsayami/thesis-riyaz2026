@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Appointment | SecureCare{% endblock %}
+
+{% block content %}
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Book Appointment</h2>
+
+<p>Schedule your visit with our doctors.</p>
+
+</div>
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<form>
+
+<input class="form-control mb-3" placeholder="Full Name">
+
+<input class="form-control mb-3" type="email" placeholder="Email">
+
+<input class="form-control mb-3" type="date">
+
+<select class="form-control mb-3">
+
+<option>Select Department</option>
+
+<option>Cardiology</option>
+
+<option>Orthopedics</option>
+
+<option>Neurology</option>
+
+<option>Pediatrics</option>
+
+</select>
+
+<textarea class="form-control mb-3" rows="4" placeholder="Additional Notes"></textarea>
+
+<button class="btn btn-primary">
+Book Appointment
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

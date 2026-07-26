@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Doctors | SecureCare{% endblock %}
+
+{% block content %}
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>Our Doctors</h2>
+<p>Meet our experienced specialists.</p>
+</div>
+
+<div class="row g-4">
+
+{% for doctor in [
+("Dr. Sarah Wilson","Cardiologist"),
+("Dr. John Smith","Neurologist"),
+("Dr. Emily Brown","Pediatrician"),
+("Dr. Michael Lee","Orthopedic")
+] %}
+
+<div class="col-md-3">
+
+<div class="card">
+
+<div class="card-body text-center">
+
+<h1>👨‍⚕️</h1>
+
+<h4>{{doctor[0]}}</h4>
+
+<p>{{doctor[1]}}</p>
+
+<a class="btn btn-primary">View Profile</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
