@@ -20,3 +20,4 @@ Enhancing Security in Containerized CI/CD Pipelines
 
 Riyaz Manandhar
 MSc Thesis Project
+# thesis-riyaz2026
