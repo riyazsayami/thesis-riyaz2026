@@ -1,4 +1,4 @@
-name: Test Self-Hosted Runner
+kname: Test and SonarQube Analysis
 
 on:
   push:
@@ -20,3 +20,13 @@ jobs:
           echo "OS: $RUNNER_OS"
           echo "Architecture: $RUNNER_ARCH"
           hostname
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=thesis-riyaz2026
+            -Dsonar.sources=app
