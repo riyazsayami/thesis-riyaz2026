@@ -1,4 +1,4 @@
-kname: Test and SonarQube Analysis
+name: Test and SonarQube Analysis
 
 on:
   push:
