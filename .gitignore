@@ -5,6 +5,8 @@ __pycache__/
 
 # Virtual Environment
 app/venv/
+ai-agent-venv/
+venv/
 
 # Flask
 instance/
@@ -21,16 +23,6 @@ instance/
 # Logs
 *.log
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# AI remediation backups
+*.backup
+*.before_auto_fix

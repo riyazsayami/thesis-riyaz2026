@@ -1,6 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 @app.route("/")
 def home():
@@ -22,7 +25,7 @@ def doctors():
 def appointment():
     return render_template("appointment.html")
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=['GET', 'POST'])  # Added methods parameter
 def dashboard():
     return render_template("dashboard.html")
 
@@ -31,4 +34,4 @@ def login():
     return render_template("login.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=False)

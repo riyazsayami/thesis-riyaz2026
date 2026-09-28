@@ -4,14 +4,9 @@ FROM python:3.12-slim
 # Set the working directory
 WORKDIR /app
 
-# Copy the requirements file
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy all application files
-COPY . .
+# Copy only the necessary files
+COPY app.py .
+COPY config.py .
 
 # Expose Flask port
 EXPOSE 5000
