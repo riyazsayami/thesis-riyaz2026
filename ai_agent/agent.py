@@ -3,6 +3,14 @@ import re
 import time
 import requests
 
+from ai_agent.ai_remediator import (
+    analyze_finding,
+    apply_remediation,
+)
+
+from ai_agent.git_manager import (
+    commit_and_push,
+)
 
 SONAR_HOST_URL = os.getenv(
     "SONAR_HOST_URL",
@@ -259,6 +267,242 @@ def main():
             f"{issue.get('message')}"
         )
 
+    # ---------------------------------------------------------
+    # AUTOMATIC S4507 REMEDIATION
+    # ---------------------------------------------------------
+
+    target_rule = "python:S4507"
+    source_path = "app/app.py"
+
+    print("\n" + "=" * 60)
+    print(" AUTOMATIC SECURITY REMEDIATION")
+    print("=" * 60)
+
+    print(
+        f"\nTarget rule: {target_rule}"
+    )
+
+    issue = get_issue_by_rule(
+        target_rule
+    )
+
+    if not issue:
+        print(
+            f"\nNo unresolved {target_rule} issue found."
+        )
+        return
+
+    print(
+        "\nSonarQube issue found:"
+    )
+
+    print(
+        f"Rule: {issue.get('rule')}"
+    )
+
+    print(
+        f"Severity: {issue.get('severity')}"
+    )
+
+    print(
+        f"Message: {issue.get('message')}"
+    )
+
+    print(
+        f"File: {issue.get('component')}"
+    )
+
+    print(
+        f"Line: {issue.get('line')}"
+    )
+
+    rule_details = get_rule_details(
+        target_rule
+    )
+
+    remediation = get_remediation_information(
+        rule_details
+    )
+
+    print(
+        "\nSonarQube remediation guidance retrieved."
+    )
+
+    print(
+        f"\nIntroduction:\n"
+        f"{remediation.get('introduction', '')}"
+    )
+
+    print(
+        f"\nRoot cause:\n"
+        f"{remediation.get('root_cause', '')}"
+    )
+
+    print(
+        f"\nHow to fix:\n"
+        f"{remediation.get('how_to_fix', '')}"
+    )
+
+    try:
+
+        remediation_result = analyze_finding(
+            issue=issue,
+            remediation=remediation,
+            source_path=source_path,
+        )
+
+    except Exception as error:
+
+        print(
+            "\nAI remediation: FAIL"
+        )
+
+        print(
+            f"Error: {error}"
+        )
+
+        return
+
+    validation = remediation_result.get(
+        "validation",
+        {}
+    )
+
+    if not validation.get(
+        "passed",
+        False
+    ):
+
+        print(
+            "\nAI validation: FAIL"
+        )
+
+        print(
+            validation
+        )
+
+        return
+
+    print(
+        "\nAI validation: PASS"
+    )
+
+    corrected_code = remediation_result.get(
+        "corrected_code",
+        ""
+    )
+
+    if not corrected_code.strip():
+
+        print(
+            "\nAutomatic source modification: FAIL"
+        )
+
+        print(
+            "No corrected source code was returned."
+        )
+
+        return
+
+    try:
+
+        modification = apply_remediation(
+            source_path=source_path,
+            corrected_code=corrected_code,
+            create_backup=True,
+        )
+
+    except Exception as error:
+
+        print(
+            "\nAutomatic source modification: FAIL"
+        )
+
+        print(
+            f"Error: {error}"
+        )
+
+        return
+
+    if not modification.get(
+        "success",
+        False
+    ):
+
+        print(
+            "\nAutomatic source modification: FAIL"
+        )
+
+        return
+
+    print(
+        "\nAutomatic source modification: PASS"
+    )
+
+    print(
+        f"Modified file: {source_path}"
+    )
+
+    print(
+        f"Backup file: "
+        f"{modification.get('backup_path')}"
+    )
+
+    try:
+
+        git_result = commit_and_push(
+            source_path=source_path,
+            commit_message=(
+                "Apply AI remediation for "
+                f"{target_rule}"
+            ),
+        )
+
+    except Exception as error:
+
+        print(
+            "\nGit automation: FAIL"
+        )
+
+        print(
+            f"Error: {error}"
+        )
+
+        return
+
+    if not git_result.get(
+        "success",
+        False
+    ):
+
+        print(
+            "\nGit automation: FAIL"
+        )
+
+        print(
+            git_result.get(
+                "message",
+                "Unknown Git error."
+            )
+        )
+
+        return
+
+    print(
+        "\nGit automation: PASS"
+    )
+
+    print(
+        "\n" + "=" * 60
+    )
+
+    print(
+        " AUTOMATIC REMEDIATION COMPLETED"
+    )
+
+    print(
+        "=" * 60
+    )
 
 if __name__ == "__main__":
     main()
