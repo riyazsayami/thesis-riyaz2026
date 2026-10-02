@@ -35,6 +35,3 @@ def login():
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000, debug=False)
-```
-
-This corrected code ensures that the `/dashboard` route is only accessible via the `GET` and `POST` methods, improving the security of the application by restricting access to the route to only the intended HTTP methods.
