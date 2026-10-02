@@ -5,8 +5,8 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Copy only the necessary files
-COPY app.py .
-COPY config.py .
+COPY ./app.py /app/app.py
+COPY ./requirements.txt /app/requirements.txt
 
 # Expose Flask port
 EXPOSE 5000
